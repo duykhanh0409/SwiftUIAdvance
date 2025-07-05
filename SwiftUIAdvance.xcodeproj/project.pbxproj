@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8BACF0782E1901F8005D467F /* ViewBuilderBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BACF0772E1901F8005D467F /* ViewBuilderBootcamp.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8BACF0592E18F3C3005D467F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		8BACF0482E18F3C1005D467F /* SwiftUIAdvance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIAdvance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BACF0582E18F3C3005D467F /* SwiftUIAdvanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIAdvanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BACF0622E18F3C3005D467F /* SwiftUIAdvanceUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUIAdvanceUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BACF0772E1901F8005D467F /* ViewBuilderBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBuilderBootcamp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		8BACF03F2E18F3C1005D467F = {
 			isa = PBXGroup;
 			children = (
+				8BACF0772E1901F8005D467F /* ViewBuilderBootcamp.swift */,
 				8BACF04A2E18F3C1005D467F /* SwiftUIAdvance */,
 				8BACF05B2E18F3C3005D467F /* SwiftUIAdvanceTests */,
 				8BACF0652E18F3C3005D467F /* SwiftUIAdvanceUITests */,
@@ -236,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BACF0782E1901F8005D467F /* ViewBuilderBootcamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
