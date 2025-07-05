@@ -14,9 +14,22 @@ struct GenericModel<T> {
     }
 }
 
+struct GenericView<T: View>: View {
+    let content: T
+    let title: String
+    
+    var body: some View {
+        VStack {
+            Text(title)
+            content
+        }
+    }
+}
+
 class GenericViewModel: ObservableObject {
     @Published var genericModel = GenericModel(info: "khanh")
     @Published var genericModelBool = GenericModel(info: false)
+    
     
     func removeData() {
         genericModel = genericModel.removeInfor()
@@ -24,10 +37,13 @@ class GenericViewModel: ObservableObject {
     }
 }
 
+
+
 struct GenericBootcamp: View {
     @StateObject private var viewModel = GenericViewModel()
     var body: some View {
         VStack {
+            GenericView(content: Text("Khanh new"), title: "Generic view")
             Text(viewModel.genericModel.info ?? "no data")
             Text(viewModel.genericModelBool.info?.description ?? "no data")
         }.onTapGesture {
