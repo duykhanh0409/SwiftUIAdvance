@@ -28,3 +28,49 @@ func getMaxSumPossibleSumOfTheNumberOfDistinceElementInEachSubArrayOfSizeK(arr: 
     
     return maxSum
 }
+
+
+//the task is determind minimum number of operation require to transfer array data into a palindrome
+func getMinOperations(data: [Int]) -> Int {
+    var parent = [Int: Int]()
+    
+    func find(_ x: Int) -> Int {
+        if parent[x] == nil {
+            parent[x] = x
+        }
+        if parent[x]! != x {
+            parent[x] = find(parent[x]!)
+        }
+        return parent[x]!
+    }
+    
+    func merge(_ a: Int, _ b: Int) {
+        let rootA = find(a)
+        let rootB = find(b)
+        if rootA != rootB {
+            parent[rootA] = rootB
+        }
+    }
+    
+    let n = data.count
+    for i in 0..<n/2 {
+        let left = data[i]
+        let right = data[n - 1 - i]
+        if left != right {
+            merge(left, right)
+        }
+    }
+    
+    var groupSizes = [Int: Int]()
+    for x in parent.keys {
+        let root = find(x)
+        groupSizes[root, default: 0] += 1
+    }
+    
+    var operations = 0
+    for size in groupSizes.values {
+        operations += size - 1
+    }
+    
+    return operations
+}
