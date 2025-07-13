@@ -48,7 +48,9 @@ struct WebView: UIViewRepresentable {
 struct WebViewBootcamp: View {
     var body: some View {
         WebView(url: URL(string: "https://naver.com")!)
-            .edgesIgnoringSafeArea(.all)
+            .frame(height: 400)
+            .cornerRadius(10)
+            .padding()
     }
 }
 
