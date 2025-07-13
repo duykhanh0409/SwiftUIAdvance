@@ -74,3 +74,5 @@ func getMinOperations(data: [Int]) -> Int {
     
     return operations
 }
+let a = [1, 2, 3, 2, 1, 3]
+print(getMinOperations(data: a))
