@@ -76,3 +76,72 @@ Task {
     let dictionary = await createCountryPopulationDict()
     print(dictionary)
 }
+
+
+let MOD = Int(1e9 + 7)
+
+func countValidNetworks(server_nodes: Int, server_from: [Int], server_to: [Int]) -> Int {
+    var adj = Array(repeating: [Int](), count: server_nodes)
+    for i in 0..<server_from.count {
+        let u = server_from[i]
+        let v = server_to[i]
+        adj[u].append(v)
+        adj[v].append(u)
+    }
+    
+    var color = Array(repeating: -1, count: server_nodes)
+    var res = 1
+    
+    for node in 0..<server_nodes {
+        if color[node] != -1 { continue }
+        
+        var queue = [node]
+        color[node] = 0
+        
+        var count0 = 1  // số node màu 0
+        var count1 = 0  // số node màu 1
+        var isOk = true
+        
+        while !queue.isEmpty {
+            let cur = queue.removeFirst()
+            for neighbor in adj[cur] {
+                if color[neighbor] == -1 {
+                    color[neighbor] = 1 - color[cur]
+                    if color[neighbor] == 0 {
+                        count0 += 1
+                    } else {
+                        count1 += 1
+                    }
+                    queue.append(neighbor)
+                } else if color[neighbor] == color[cur] {
+                    isOk = false
+                }
+            }
+        }
+        
+        if !isOk {
+            return 0
+        }
+        
+        // Chỉ node màu 0 mới có 2 lựa chọn: 1 hoặc 3
+        // => Tổng số cách cho component này = 2^count0
+        let ways = powmod(2, count0)
+        res = (res * ways) % MOD
+    }
+    
+    return res
+}
+
+func powmod(_ base: Int, _ exp: Int) -> Int {
+    var ans = 1
+    var b = base
+    var e = exp
+    while e > 0 {
+        if e % 2 == 1 {
+            ans = (ans * b) % MOD
+        }
+        b = (b * b) % MOD
+        e /= 2
+    }
+    return ans
+}
