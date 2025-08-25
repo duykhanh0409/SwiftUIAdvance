@@ -9,20 +9,25 @@ import SwiftUI
 
 class AsyncStreamDataManager {
     
-    func getAsyncStream() -> AsyncStream<Int> {
-        AsyncStream { continuation in
-            self.getFakeData { value in
+    func getAsyncStream() -> AsyncThrowingStream<Int, Error> {
+        AsyncThrowingStream { [weak self] continuation in
+            self?.getFakeData { value in
                 continuation.yield(value)
+            } onFinished: { error in
+                continuation.finish(throwing: error)
             }
         }
     }
-    
-    func getFakeData(completion: @escaping(_ value:Int) -> Void) {
+        
+    func getFakeData(newValue: @escaping(_ value:Int) -> Void, onFinished: @escaping(_ error: Error)-> Void) {
         let items:[Int] = [1,2,3,4,5,6,7,8,9,10]
         
         for item in items {
             DispatchQueue.main.asyncAfter(deadline: .now() + Double(item)) {
-                completion(item)
+                newValue(item)
+                if item == items.last! {
+                    onFinished(nil)
+                }
             }
         }
     }
@@ -35,8 +40,12 @@ final class AsyncStreamViewModel: ObservableObject {
     
     func onViewAppear() {
         Task {
-            for await value in manager.getAsyncStream() {
-                currentNumber = value
+            do {
+                for try await value in manager.getAsyncStream() {
+                    currentNumber = value
+                }
+            }catch {
+                print(error)
             }
         }
     }
