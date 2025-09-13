@@ -19,7 +19,7 @@ class AsyncStreamDataManager {
         }
     }
         
-    func getFakeData(newValue: @escaping(_ value:Int) -> Void, onFinished: @escaping(_ error: Error)-> Void) {
+    func getFakeData(newValue: @escaping(_ value:Int) -> Void, onFinished: @escaping(_ error: Error?)-> Void) {
         let items:[Int] = [1,2,3,4,5,6,7,8,9,10]
         
         for item in items {
